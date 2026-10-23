@@ -1,0 +1,387 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+}
+
+.streamsquad-navbar {
+    background: #111827;
+    padding: 14px 0;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.navbar-nav {
+    gap: 8px;
+}
+
+.hero-section {
+    min-height: 560px;
+    background-image:
+        linear-gradient(rgba(17, 24, 39, 0.78), rgba(17, 24, 39, 0.78)),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    width: 100%;
+    color: white;
+    padding: 70px 20px;
+}
+
+.hero-label,
+.section-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.hero-label {
+    color: #93c5fd;
+}
+
+.hero-section h1 {
+    font-size: 6vw;
+    line-height: 0.98;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    max-width: 650px;
+    margin: 0 auto 30px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #e5e7eb;
+}
+
+.dashboard-section,
+.content-section {
+    padding: 80px 0;
+}
+
+.dashboard-section {
+    background: #ffffff;
+}
+
+.content-section:nth-of-type(even) {
+    background: #f4f6f9;
+}
+
+.section-heading {
+    margin-bottom: 40px;
+}
+
+.section-label {
+    color: #2563eb;
+}
+
+.section-heading h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.section-heading > p:not(.section-label) {
+    color: #6b7280;
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-icon {
+    display: block;
+    font-size: 1.6rem;
+    margin-bottom: 22px;
+}
+
+.card-label {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.dashboard-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+
+.card-detail {
+    color: #6b7280;
+    margin: 0;
+}
+
+.featured-image-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.featured-image {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+.featured-caption {
+    margin-top: 14px;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.watchlist-panel {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.watchlist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.watchlist-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 17px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    cursor: grab;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.watchlist-item:active {
+    cursor: grabbing;
+}
+
+.watchlist-item.dragging {
+    opacity: 0.5;
+}
+
+.priority-number {
+    min-width: 38px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.show-name {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.watchlist-status {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.drag-hint {
+    margin: 20px 0 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.watchlist-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.watched-show {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.location-section {
+    background: #eef5ff;
+}
+
+.location-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px;
+    min-height: 180px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+#locationStatus {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+#locationDetails {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f1f5f9;
+    border-radius: 8px;
+}
+
+#locationDetails p {
+    margin-bottom: 8px;
+}
+
+#locationDetails p:last-child {
+    margin-bottom: 0;
+}
+
+.feature-list {
+    display: grid;
+    gap: 14px;
+}
+
+.feature-list > div {
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.feature-list strong,
+.feature-list span {
+    display: block;
+}
+
+.feature-list strong {
+    margin-bottom: 5px;
+}
+
+.feature-list span {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.squad-form-card {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.squad-form-card h3 {
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.form-description {
+    color: #6b7280;
+    margin-bottom: 28px;
+}
+
+.site-footer {
+    background: #111827;
+    color: white;
+    padding: 45px 0;
+}
+
+.site-footer h3 {
+    margin-bottom: 8px;
+}
+
+.site-footer p {
+    color: #9ca3af;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 500px;
+    }
+
+    .hero-section h1 {
+        font-size: 9vw;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .dashboard-section,
+    .content-section {
+        padding: 60px 0;
+    }
+
+    .watchlist-panel {
+        width: 95%;
+    }
+
+    .watchlist-actions {
+        width: 100%;
+        padding-left: 53px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 460px;
+    }
+
+    .hero-overlay {
+        padding: 50px 15px;
+    }
+
+    .hero-section h1 {
+        font-size: 11vw;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .dashboard-section,
+    .content-section {
+        padding: 45px 0;
+    }
+
+    .watchlist-panel,
+    .squad-form-card {
+        padding: 22px;
+    }
+
+    .watchlist-item {
+        flex-wrap: wrap;
+    }
+
+    .watchlist-status {
+        width: 100%;
+        padding-left: 53px;
+    }
+}

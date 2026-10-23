@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewpoint" content="width=device-width,initial-scale=1.0">
+        <title>Media Queries Example</title>
+        <style>
+            body{
+                font-family:'Arial',sans-serif;
+                margin:20px;
+                background-color: #f4f4f4;
+            }
+            h1{
+                color:#007bff;
+            }
+            p{
+                color:#333;
+            }
+            @media screen and (min-width: 600px){
+                body{
+                    background-color: #fff;
+                }
+                h1{
+                    font-size:2em;
+                }
+                p{
+                    font-size:1.2em;
+                }
+            }
+            @media screen and (min-width: 1200px){
+                h1{
+                    font-size:2.5em;
+                }
+                p{
+                    font-size:1.4em;
+                }
+            }
+        </style>
+
+    </head>
+    <body>
+        <h1>Responsive Heading</h1>
+        <p>This is an example paragraph with text that will adapt its style based on the screen size using media queries.</p>
+        
+    </body>
+</html>

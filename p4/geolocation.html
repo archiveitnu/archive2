@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Geolocation Example</title>
+
+    <style>
+        #location-info {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Geolocation Example</h1>
+
+    <div id="location-info">
+        <strong>Latitude:</strong>
+        <span id="latitude"></span>
+        <br>
+
+        <strong>Longitude:</strong>
+        <span id="longitude"></span>
+    </div>
+
+    <script>
+
+      
+        if (navigator.geolocation) {
+
+            navigator.geolocation.getCurrentPosition(
+                showPosition,
+                showError
+            );
+
+        } else {
+
+            alert("Geolocation is not supported by this browser");
+
+        }
+
+        function showPosition(position) {
+
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            document.getElementById("latitude").textContent =
+                latitude.toFixed(6);
+
+            document.getElementById("longitude").textContent =
+                longitude.toFixed(6);
+        }
+
+
+        function showError(error) {
+
+            var errorMessage;
+
+            switch (error.code) {
+
+                case error.PERMISSION_DENIED:
+                    errorMessage = "User denied the request for Geolocation.";
+                    break;
+
+                case error.POSITION_UNAVAILABLE:
+                    errorMessage = "Location information is unavailable.";
+                    break;
+
+                case error.TIMEOUT:
+                    errorMessage = "The request to get user location timed out.";
+                    break;
+
+                case error.UNKNOWN_ERROR:
+                    errorMessage = "An unknown error occurred.";
+                    break;
+
+                default:
+                    errorMessage = "Unspecified error.";
+                    break;
+            }
+
+            alert(errorMessage);
+        }
+
+    </script>
+
+</body>
+
+</html>

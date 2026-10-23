@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+header {
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+header h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 18px;
+}
+
+main {
+  width: 90%;
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+section {
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+section h2 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+#locationStatus {
+  margin-bottom: 15px;
+}
+
+#locationDetails {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  display: none;
+}
+
+.add-show {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.add-show input {
+  flex: 1;
+  padding: 11px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.instruction {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+#watchlist {
+  list-style: none;
+}
+
+.show-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: grab;
+}
+
+.show-item:active {
+  cursor: grabbing;
+}
+
+.show-number {
+  font-weight: bold;
+  color: #2563eb;
+  min-width: 30px;
+}
+
+.show-name {
+  flex: 1;
+  font-size: 17px;
+}
+
+.storage-section p {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.storage-section button {
+  background-color: #dc2626;
+}
+
+.storage-section button:hover {
+  background-color: #b91c1c;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 32px;
+  }
+
+  header p {
+    font-size: 15px;
+  }
+
+  main {
+    width: 95%;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  .add-show {
+    flex-direction: column;
+  }
+
+  .add-show button {
+    width: 100%;
+  }
+}

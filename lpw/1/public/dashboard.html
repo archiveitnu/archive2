@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <h2>College Portal</h2>
+
+        <div>
+            <span id="userInfo"></span>
+            <button id="logoutBtn" class="logout">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <h1 id="welcome"></h1>
+        <p id="roleDescription"></p>
+
+        <!-- ADMIN PANEL -->
+        <section id="adminPanel" class="panel hidden">
+
+            <h2>Admin Panel</h2>
+
+            <h3>Create User</h3>
+
+            <form id="createUserForm">
+                <input id="newName" placeholder="Full name" required>
+                <input id="newUsername" placeholder="Username" required>
+
+                <input id="newPassword" type="password"
+                       placeholder="Password (8+ characters)"
+                       minlength="8" required>
+
+                <select id="newRole">
+                    <option value="admin">Admin</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+
+                <button type="submit">Create User</button>
+            </form>
+
+            <h3>Manage Users</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="usersTable"></tbody>
+            </table>
+
+        </section>
+
+        <!-- TEACHER PANEL -->
+        <section id="teacherPanel" class="panel hidden">
+
+            <h2>Teacher Panel</h2>
+
+            <h3>Add Student Record</h3>
+
+            <form id="addStudentForm">
+                <input id="studentName" placeholder="Student name" required>
+                <input id="course" placeholder="Course" required>
+
+                <input id="marks" type="number"
+                       min="0" max="100"
+                       placeholder="Marks" required>
+
+                <button type="submit">Add Student</button>
+            </form>
+
+            <h3>Student Records</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentsTable"></tbody>
+            </table>
+
+        </section>
+
+        <!-- STUDENT PANEL -->
+        <section id="studentPanel" class="panel hidden">
+
+            <h2>My Profile</h2>
+
+            <div id="profile"></div>
+
+        </section>
+
+        <p id="statusMessage" class="message"></p>
+
+    </main>
+
+    <script src="/app.js"></script>
+
+</body>
+</html>

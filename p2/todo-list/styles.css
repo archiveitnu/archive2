@@ -1,0 +1,92 @@
+body{
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto';
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 5px solid black;
+}
+
+header > div{
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.input-container > button{
+  width: 150px;
+  height: 50px;
+  border-radius: 40px;
+  border: 5px solid black;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: white;
+  transition-duration: 0.3s;
+}
+
+.input-container > button:hover{
+  color: white;
+  background-color: black;
+}
+
+.input-container > input{
+  width: 300px;
+  height: 35px;
+  border-radius: 50px;
+  border: 5px solid black;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: white;
+  padding-left: 10px;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.task-container{
+  border: 5px solid black;
+  width: 800px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+
+.task-container > div{
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.task-container > button {
+  width: 100px;
+  height: 40px;
+  border-radius: 40px;
+  border: 5px solid rgb(255, 88, 88);
+  font-size: 16px;
+  font-weight: bold;
+  background-color: white;
+  color: rgb(255, 88, 88);
+  transition-duration: 0.3s;
+}
+
+.task-container > button:hover{
+  border: 5px solid rgb(155, 54, 54);
+  color: rgb(155, 54, 54);
+}
+
+.completed{
+  text-decoration: line-through;
+}
+

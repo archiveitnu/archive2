@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamSquad</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark streamsquad-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">StreamSquad</a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#watchlist">Watchlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#location">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#squad">Squad</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section" id="dashboard">
+        <div class="hero-overlay">
+            <div class="container text-center">
+                <p class="hero-label">YOUR WATCH PARTY HUB</p>
+                <h1>Watch together.<br>Vote together.</h1>
+
+                <p class="hero-subtitle">
+                    Plan your next watch party with your squad and never miss an episode.
+                </p>
+
+                <a href="#watchlist" class="btn btn-primary btn-lg">Open Watchlist</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard-section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label">YOUR SQUAD</p>
+                    <h2>Everything in one place</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="dashboard-card h-100">
+                            <span class="card-icon">👥</span>
+                            <p class="card-label">MY SQUAD</p>
+                            <h3 id="dashboardSquadName">Netflix Nerds</h3>
+                            <p class="card-detail">Your current squad</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="dashboard-card h-100">
+                            <span class="card-icon">●</span>
+                            <p class="card-label">MEMBERS ONLINE</p>
+                            <h3 id="memberCount">6 Members</h3>
+                            <p class="card-detail">
+                                <span id="watchedCount">0</span> watched
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="dashboard-card h-100">
+                            <span class="card-icon">◷</span>
+                            <p class="card-label">NEXT WATCH PARTY</p>
+                            <h3 id="nextPartyDay">Friday</h3>
+                            <p class="card-detail" id="nextPartyTime">8:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="dashboard-card h-100">
+                            <span class="card-icon">▶</span>
+                            <p class="card-label">CURRENTLY WATCHING</p>
+                            <h3 id="currentlyWatching">Breaking Bad</h3>
+                            <p class="card-detail">Season 1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section featured-section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label">FEATURED THIS WEEK</p>
+                    <h2>Picked by your squad</h2>
+                </div>
+
+                <div class="featured-image-wrap">
+                    <img
+                        src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80"
+                        srcset="
+                            https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=480&q=80  480w,
+                            https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80  800w,
+                            https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&q=80 1200w,
+                            https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&q=80 1600w
+                        "
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, 900px"
+                        alt="A cozy home theater setup, featured pick of the week"
+                        class="featured-image"
+                        loading="lazy"
+                    >
+                    <p class="featured-caption">
+                        The browser automatically loads a smaller image file on phones and a larger one on desktops — resize the window and check the Network tab to see the source change.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="watchlist">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label">SHARED WATCHLIST</p>
+                    <div class="section-title-row">
+                        <h2>What should we watch next?</h2>
+                        <span id="watchlistCount" class="badge rounded-pill text-bg-primary">0 shows</span>
+                    </div>
+                    <p>Add shows and later drag them to change the squad's priority.</p>
+                </div>
+
+                <div class="watchlist-panel">
+                    <div class="input-group mb-4">
+                        <input type="text" id="showInput" class="form-control" placeholder="Enter a movie or show">
+                        <button id="addShowButton" class="btn btn-primary" type="button">Add Show</button>
+                    </div>
+
+                    <ul id="watchlistItems" class="watchlist-items">
+                        <li class="watchlist-item">
+                            <span class="priority-number">#1</span>
+                            <span class="show-name">Breaking Bad</span>
+                            <span class="watchlist-status">Currently watching</span>
+                        </li>
+                        <li class="watchlist-item">
+                            <span class="priority-number">#2</span>
+                            <span class="show-name">Dark</span>
+                            <span class="watchlist-status">Up next</span>
+                        </li>
+                        <li class="watchlist-item">
+                            <span class="priority-number">#3</span>
+                            <span class="show-name">Stranger Things</span>
+                            <span class="watchlist-status">Queued</span>
+                        </li>
+                        <li class="watchlist-item">
+                            <span class="priority-number">#4</span>
+                            <span class="show-name">The Boys</span>
+                            <span class="watchlist-status">Queued</span>
+                        </li>
+                    </ul>
+
+                    <div class="watchlist-footer">
+                        <p class="drag-hint">↕ Drag and drop shows to change their priority.</p>
+                        <button id="clearWatchlistButton" type="button" class="btn btn-sm btn-outline-danger">Clear Watchlist</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section location-section" id="location">
+            <div class="container">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-7">
+                        <div class="section-heading mb-0">
+                            <p class="section-label">WATCH FROM ANYWHERE</p>
+                            <h2>Where are you watching from?</h2>
+                            <p>Find your current location so StreamSquad can understand where your watch party is happening.</p>
+                            <button id="locationButton" class="btn btn-primary" type="button">Find My Location</button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="location-card">
+                            <p id="locationStatus">Your location has not been detected yet.</p>
+                            <div id="locationDetails">
+                                <p><strong>Latitude:</strong> <span id="latitude">—</span></p>
+                                <p><strong>Longitude:</strong> <span id="longitude">—</span></p>
+                                <p><strong>Accuracy:</strong> <span id="accuracy">—</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="squad">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-5">
+                        <div class="section-heading">
+                            <p class="section-label">YOUR COMMUNITY</p>
+                            <h2>Create your Squad.</h2>
+                            <p>Bring your friends together and decide what to watch next.</p>
+                        </div>
+
+                        <div class="feature-list">
+                            <div>
+                                <strong>Shared Watchlist</strong>
+                                <span>Keep everyone's picks together.</span>
+                            </div>
+                            <div>
+                                <strong>Watch Parties</strong>
+                                <span>Plan when your squad watches.</span>
+                            </div>
+                            <div>
+                                <strong>Voting</strong>
+                                <span>Let the squad decide.</span>
+                            </div>
+                        </div>
+
+                        <div class="bootstrap-note mt-4">
+                            <span class="badge text-bg-dark mb-2">Bootstrap 5</span>
+                            <p class="mb-0">This interface uses Bootstrap's responsive grid, forms, buttons and navbar components.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="squad-form-card">
+                            <h3>Squad Details</h3>
+                            <p class="form-description">Enter the details for your new squad.</p>
+
+                            <form id="squadForm">
+                                <div class="mb-3">
+                                    <label for="squadName" class="form-label">Squad Name</label>
+                                    <input type="text" id="squadName" class="form-control" placeholder="Netflix Nerds" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="squadCode" class="form-label">Squad Code</label>
+                                    <input type="text" id="squadCode" class="form-control" placeholder="NETFLIX24" required>
+                                    <div class="form-text">Share this code with your friends to invite them.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Squad Description</label>
+                                    <textarea id="description" class="form-control" rows="3" placeholder="Describe your squad"></textarea>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label for="memberName" class="form-label">Your Name</label>
+                                        <input type="text" id="memberName" class="form-control" placeholder="Enter your name" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="memberEmail" class="form-label">Email ID</label>
+                                        <input type="email" id="memberEmail" class="form-control" placeholder="you@example.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-check form-switch mb-4">
+                                    <input class="form-check-input" type="checkbox" id="notifications" checked>
+                                    <label class="form-check-label" for="notifications">Enable watch party notifications</label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">Create Squad</button>
+                            </form>
+
+                            <div id="activeSquadSummary" class="active-squad-summary">
+                                <span class="badge text-bg-light">Current Squad</span>
+                                <strong id="activeSquadCode">NETFLIX24</strong>
+                                <span id="activeSquadMember">Ready to invite members</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container text-center">
+            <h3>StreamSquad</h3>
+            <p>Watch together. Vote together.</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="squadCreatedModal" tabindex="-1" aria-labelledby="squadCreatedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="squadCreatedModalLabel">Squad Created</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p id="squadCreatedMessage" class="mb-0">Your Squad has been created successfully.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

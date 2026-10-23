@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamSquad - Vue Directives</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        nav {
+            background: #0f172a;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        nav h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .instruction {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .click-text {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 12px;
+            width: 70%;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .date {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .empty {
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <nav>
+            <h1>StreamSquad — Vue.js Directives</h1>
+        </nav>
+
+        <main class="container">
+            <section class="card">
+                <h2>1. Uppercase Custom Directive</h2>
+                <p class="instruction">
+                    Click the text to transform it into uppercase.
+                </p>
+                <p v-uppercase class="click-text">
+                    click me to make this text uppercase
+                </p>
+            </section>
+
+            <section class="card">
+                <h2>2. Dynamic List with Custom Directive</h2>
+                <p class="instruction">
+                    Add shows to the watchlist. Each dynamically-created item uses the custom uppercase directive.
+                </p>
+                <div>
+                    <input v-model="newShow" @keyup.enter="addShow" placeholder="Enter a movie or show">
+                    <button @click="addShow">Add Show</button>
+                </div>
+                <ul>
+                    <li v-for="(show, index) in shows" :key="show.id" v-uppercase>
+                        #{{ index + 1 }} — {{ show.title }}
+                    </li>
+                </ul>
+                <p v-if="shows.length === 0" class="empty">
+                    No shows in the watchlist.
+                </p>
+            </section>
+
+            <section class="card">
+                <h2>3. Human-Readable Date Directive</h2>
+                <p class="instruction">
+                    The custom directive converts a date into a human-readable format.
+                </p>
+                <ul>
+                    <li v-for="event in events" :key="event.id">
+                        <strong>{{ event.name }}</strong>
+                        <div class="date" v-human-date="event.date"></div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        const app = createApp({
+            data() {
+                return {
+                    newShow: "",
+                    shows: [
+                        { id: 1, title: "Breaking Bad" },
+                        { id: 2, title: "Dark" },
+                        { id: 3, title: "Stranger Things" }
+                    ],
+                    events: [
+                        { id: 1, name: "Next Watch Party", date: "2026-09-25T20:00:00" },
+                        { id: 2, name: "Squad Created", date: "2026-09-20T14:30:00" },
+                        { id: 3, name: "Last Watch Party", date: "2026-09-15T19:00:00" }
+                    ]
+                };
+            },
+            methods: {
+                addShow() {
+                    const title = this.newShow.trim();
+                    if (!title) return;
+
+                    this.shows.push({
+                        id: Date.now(),
+                        title: title
+                    });
+                    this.newShow = "";
+                }
+            }
+        });
+
+        app.directive("uppercase", {
+            mounted(el) {
+                el.dataset.originalText = el.textContent;
+                el.addEventListener("click", () => {
+                    el.textContent = el.textContent.toUpperCase();
+                });
+            }
+        });
+
+        app.directive("human-date", {
+            mounted(el, binding) {
+                const date = new Date(binding.value);
+                if (isNaN(date.getTime())) {
+                    el.textContent = "Invalid date";
+                    return;
+                }
+                el.textContent = date.toLocaleString("en-IN", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                });
+            },
+            updated(el, binding) {
+                const date = new Date(binding.value);
+                if (isNaN(date.getTime())) {
+                    el.textContent = "Invalid date";
+                    return;
+                }
+                el.textContent = date.toLocaleString("en-IN", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                });
+            }
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

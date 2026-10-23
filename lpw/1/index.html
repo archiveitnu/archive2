@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Role-Based Access Control</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        input {
+            display: block;
+            width: 90%;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        #message {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="login">
+        <h2>Login</h2>
+
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+        <p>Admin: admin / 1234</p>
+        <p>Student: student / 1234</p>
+    </section>
+
+    <section id="dashboard" class="hidden">
+        <h2 id="welcome"></h2>
+
+        <div id="adminPanel" class="hidden">
+            <h3>Admin Panel</h3>
+
+            <button onclick="loadUsers()">View Users</button>
+
+            <h4>Delete User</h4>
+            <input id="deleteId" placeholder="User ID">
+            <button onclick="deleteUser()">Delete User</button>
+
+            <h4>Add Student Record</h4>
+            <input id="studentName" placeholder="Student Name">
+            <input id="course" placeholder="Course">
+            <input id="marks" type="number" placeholder="Marks">
+
+            <button onclick="addStudent()">Add Student</button>
+        </div>
+
+        <div id="studentPanel" class="hidden">
+            <h3>Student Dashboard</h3>
+            <p>You can view student records but cannot manage users or add records.</p>
+        </div>
+
+        <h3>Student Records</h3>
+        <button onclick="loadStudents()">View Student Records</button>
+
+        <ul id="records"></ul>
+
+        <button onclick="logout()">Logout</button>
+    </section>
+
+    <section>
+        <h3>Server Response</h3>
+        <pre id="message">Please log in.</pre>
+    </section>
+
+    <script>
+        let currentUser = null;
+
+// Send requests to the server
+async function request(route, method = "GET", data = null) {
+    const options = {
+        method: method,
+        headers: {
+            username: currentUser.username,
+            password: currentUser.password,
+            "Content-Type": "application/json"
+        }
+    };
+
+    if (data) {
+        options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch("http://localhost:3000" + route, options);
+    const result = await response.json();
+
+    document.getElementById("message").textContent =
+        JSON.stringify(result, null, 2);
+
+    return { response, result };
+}
+
+// Login
+async function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const output = document.getElementById("message");
+
+    output.textContent = "Logging in...";
+
+    currentUser = { username, password };
+
+    try {
+        const { response, result } = await request("/students");
+
+        if (response.ok) {
+            document.getElementById("login").classList.add("hidden");
+            document.getElementById("dashboard").classList.remove("hidden");
+
+            document.getElementById("welcome").textContent =
+                "Welcome, " + username;
+
+            if (username === "admin") {
+                document.getElementById("adminPanel").classList.remove("hidden");
+            } else {
+                document.getElementById("studentPanel").classList.remove("hidden");
+            }
+
+            loadStudents();
+        } else {
+            currentUser = null;
+            output.textContent = JSON.stringify(result, null, 2);
+        }
+    } catch (error) {
+        currentUser = null;
+        output.textContent = "Error: " + error.message;
+        console.error(error);
+    }
+}
+
+// Admin: View users
+async function loadUsers() {
+    const { response, result } = await request("/users");
+
+    if (response.ok) {
+        document.getElementById("message").textContent =
+            JSON.stringify(result, null, 2);
+    }
+}
+
+// Admin: Delete user
+async function deleteUser() {
+    const id = document.getElementById("deleteId").value;
+
+    const { response } = await request("/users/" + id, "DELETE");
+
+    if (response.ok) {
+        loadUsers();
+    }
+}
+
+// View student records
+async function loadStudents() {
+    const { response, result } = await request("/students");
+
+    if (response.ok) {
+        const records = document.getElementById("records");
+
+        records.replaceChildren();
+
+        result.forEach(student => {
+            const li = document.createElement("li");
+
+            li.textContent =
+                `${student.name} | ${student.course} | Marks: ${student.marks}`;
+
+            records.appendChild(li);
+        });
+    }
+}
+
+// Admin: Add student
+async function addStudent() {
+    const data = {
+        name: document.getElementById("studentName").value,
+        course: document.getElementById("course").value,
+        marks: Number(document.getElementById("marks").value)
+    };
+
+    const { response } = await request("/students", "POST", data);
+
+    if (response.ok) {
+        loadStudents();
+    }
+}
+
+// Logout
+function logout() {
+    currentUser = null;
+
+    document.getElementById("dashboard").classList.add("hidden");
+    document.getElementById("login").classList.remove("hidden");
+    document.getElementById("adminPanel").classList.add("hidden");
+    document.getElementById("studentPanel").classList.add("hidden");
+
+    document.getElementById("message").textContent = "Logged out.";
+}
+    </script>
+
+</body>
+</html>

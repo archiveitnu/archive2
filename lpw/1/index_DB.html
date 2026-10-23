@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role-Based Access Control</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 750px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #f4f4f4;
+    }
+    section {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+    input, select, button {
+        padding: 10px;
+        margin: 5px 0;
+    }
+    input, select {
+        display: block;
+        width: 95%;
+        box-sizing: border-box;
+    }
+    button {
+        cursor: pointer;
+    }
+    .hidden {
+        display: none;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background: #222;
+        color: white;
+    }
+    #message {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+</style>
+</head>
+<body>
+<!-- Login Section -->
+<section id="login">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p>Admin: admin / 1234</p>
+    <p>Student: student / 1234</p>
+</section>
+<!-- Dashboard Section -->
+<section id="dashboard" class="hidden">
+    <h2 id="welcome"></h2>
+    <p id="role"></p>
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="hidden">
+        <h3>Create User</h3>
+        <input type="text" id="newUsername" placeholder="Username">
+        <input type="password" id="newPassword" placeholder="Password">
+        <select id="newRole">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+        <button onclick="createUser()">Create User</button>
+        <h3>Manage Users</h3>
+        <button onclick="loadUsers()">View Users</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="usersTable"></tbody>
+        </table>
+    </div>
+    <!-- Regular User Panel -->
+    <div id="userPanel" class="hidden">
+        <h3>User Dashboard</h3>
+        <p>You are logged in as a regular user.</p>
+        <button onclick="accessUser()">Access User Route</button>
+    </div>
+    <br>
+    <button onclick="logout()">Logout</button>
+</section>
+<!-- Server Response -->
+<section>
+    <h3>Server Response</h3>
+    <pre id="message">Please log in.</pre>
+</section>
+<!-- JavaScript File -->
+<script src="/script.js"></script>
+</body>
+</html>
